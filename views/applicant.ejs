@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+#applicants {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#applicants td, #applicants th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#applicants tr:nth-child(even){background-color: #f2f2f2;}
+
+#applicants tr:hover {background-color: yellow;}
+
+#applicants th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: Red;
+  color: white;
+}
+.buttonDownload {
+    margin-top:5%;
+    margin-left:45%;
+	display: inline-block;
+	position: relative;
+	padding: 10px 25px;
+  
+	background-color: #4CC713;
+	color: white;
+  
+	font-family: sans-serif;
+	text-decoration: none;
+	font-size: 0.9em;
+	text-align: center;
+	text-indent: 15px;
+}
+
+.buttonDownload:hover {
+	background-color: #333;
+	color: white;
+}
+
+.buttonDownload:before, .buttonDownload:after {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 52%;
+}
+
+/* Download box shape  */
+.buttonDownload:before {
+	width: 10px;
+	height: 2px;
+	border-style: solid;
+	border-width: 0 2px 2px;
+}
+
+/* Download arrow shape */
+.buttonDownload:after {
+	width: 0;
+	height: 0;
+	margin-left: 3px;
+	margin-top: -7px;
+  
+	border-style: solid;
+	border-width: 4px 4px 0 4px;
+	border-color: transparent;
+	border-top-color: inherit;
+	
+	animation: downloadArrow 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.buttonDownload:hover:before {
+	border-color: #4CC713;
+}
+
+.buttonDownload:hover:after {
+	border-top-color: #4CC713;
+	animation-play-state: running;
+}
+
+/* keyframes for the download icon anim */
+@keyframes downloadArrow {
+	/* 0% and 0.001% keyframes used as a hackish way of having the button frozen on a nice looking frame by default */
+	0% {
+		margin-top: -7px;
+		opacity: 1;
+	}
+	
+	0.001% {
+		margin-top: -15px;
+		opacity: 0;
+	}
+	
+	50% {
+		opacity: 1;
+	}
+	
+	100% {
+		margin-top: 0;
+		opacity: 0;
+	}
+</style>
+  <title>Applicant </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    table, td, th {  
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 50%;
+     
+    }
+    .table-data{
+        position: relative;
+      left:150px;
+      top:100px;
+    }
+    th, td {
+      padding: 15px;
+    }
+    .search{
+      float: left;
+    }
+    </style>
+</head>
+<body>
+    <div>
+   <h2>Showing Results</h2>
+    <table border="1" id="applicants">
+        <tr>
+            <th>S.N</th>
+            <th>Application Number</th>
+             <th>Id</th>
+            <th>Adv Number</th>
+            <th>Post </th>
+            <th>Department </th>
+            <th>Apply Date</th>
+            <th>Pay Status</th>
+           
+        </tr>
+        
+        <%
+        if(userData.length!=0){
+        var i=1;
+         data=userData[0]
+        %>
+        <tr>
+            <td><%=i; %></td>
+            <td><%=data.app_no %></td>
+            <td><%=data.id %></td>
+            <td><%=data.adv_no %></td>
+            <td><%=data.post_name %></td>
+            <td><%=data.depName %></td>
+            <td><%=data.app_date %></td>
+            <td><%=data.pay_status %></td> 
+        </tr>
+        <%  i++; %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Data Found</td>
+            </tr>
+        <% } %>
+    </table>
+      <button class="buttonDownload"><a href="<%= data.d_path %>" style="text-decoration: none;">Download<a></button>
+    </div>
+</body>
+</html>
